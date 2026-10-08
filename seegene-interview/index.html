@@ -341,6 +341,24 @@
     .checklist input { margin-top: 5px; accent-color: var(--blue); }
     .checklist input:checked + span { color: #81909c; text-decoration: line-through; }
 
+    .prep-answer {
+      margin-top: 14px;
+      padding: 15px 16px;
+      color: #274056;
+      background: var(--sky);
+      border: 1px solid #cfe1f7;
+      border-radius: 11px;
+      font-size: 14px;
+    }
+
+    .prep-answer b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--navy);
+    }
+
+    .prep-answer p { margin: 0; }
+
     .callout {
       margin-top: 14px;
       padding: 15px 17px;
@@ -637,6 +655,7 @@
                   <li><label><input type="checkbox"><span>통신 단절 후 DB와 실제 장비 상태 재동기화 설명</span></label></li>
                   <li><label><input type="checkbox"><span>중복 분주·촬영 방지를 위한 명령 ID와 멱등성 설명</span></label></li>
                 </ul>
+                <div class="prep-answer"><b>면접 답변 핵심</b><p>“검사별 상태를 등록·진행·완료·배출로 관리하고, 내부적으로는 분주·배양·촬영 단계를 작업 큐로 실행했습니다. 피펫이나 카메라처럼 공유하는 자원은 한 작업만 점유하도록 제어했습니다. 장애 후에는 DB 기록과 실제 장비 상태를 비교해 마지막으로 완료가 확인된 안전 지점부터 재개하고, 명령 ID와 완료 상태로 중복 분주나 촬영을 방지합니다.”</p></div>
                 <div class="callout">근거: 동시 검사 최대 16개, 명령당 최대 3회 시도, 시도당 60초</div>
               </div>
             </details>
@@ -650,6 +669,7 @@
                   <li><label><input type="checkbox"><span>생산자-소비자 큐와 thread safety</span></label></li>
                   <li><label><input type="checkbox"><span>MVVM·DI·Repository·Adapter 사용 이유</span></label></li>
                 </ul>
+                <div class="prep-answer"><b>면접 답변 핵심</b><p>“장비 통신과 영상 처리는 UI 스레드와 분리하고 async/await로 비동기 실행했습니다. 장시간 작업은 CancellationToken으로 안전하게 중단하며 예외는 로그와 상위 작업 상태에 전달합니다. 화면 변경만 Dispatcher에서 수행하고, 수신 데이터는 생산자-소비자 큐로 처리합니다. MVVM은 화면과 업무 로직 분리, DI와 Adapter는 실제 장비와 Emulator 교체, Repository는 상태 저장소 분리에 활용했습니다.”</p></div>
               </div>
             </details>
 
@@ -662,6 +682,7 @@
                   <li><label><input type="checkbox"><span>ACK와 실제 장비 동작 완료의 차이</span></label></li>
                   <li><label><input type="checkbox"><span>명령·파라미터·응답·오류·버전 인터페이스 명세</span></label></li>
                 </ul>
+                <div class="prep-answer"><b>면접 답변 핵심</b><p>“TCP는 한 번의 수신이 한 메시지라는 보장이 없으므로 길이 정보나 구분자를 기준으로 버퍼에서 완전한 메시지를 조립합니다. 요청 ID로 응답을 연결하고 timeout·heartbeat로 통신 이상을 판단합니다. ACK는 명령 수신 확인일 뿐 실제 동작 완료와 구분합니다. 재연결 후에는 장비 상태를 다시 조회하고, 결과가 불명확한 동작은 자동 재전송보다 안전 정지를 우선합니다.”</p></div>
               </div>
             </details>
 
@@ -674,6 +695,7 @@
                   <li><label><input type="checkbox"><span>마지막 안전 지점과 중복 실행 방지 키</span></label></li>
                   <li><label><input type="checkbox"><span>SQLite 상태복구와 PostgreSQL 경험 사례</span></label></li>
                 </ul>
+                <div class="prep-answer"><b>면접 답변 핵심</b><p>“검체, 검사, 단계, 장비 명령, 결과, 감사로그를 분리해 저장하고 검사 상태 변경과 명령 이력을 가능한 한 같은 트랜잭션 경계에서 관리합니다. 재실행 시에는 마지막 기록이 아니라 마지막으로 완료가 확인된 안전 지점을 기준으로 복구합니다. 검사 ID와 단계 ID를 중복 실행 방지 키로 사용하고 모든 자동·수동 변경을 audit trail에 남깁니다.”</p></div>
               </div>
             </details>
 
@@ -686,6 +708,7 @@
                   <li><label><input type="checkbox"><span>인증·권한, 서버 로그, API 버전 관리</span></label></li>
                   <li><label><input type="checkbox"><span>Polling과 SignalR/WebSocket 차이</span></label></li>
                 </ul>
+                <div class="prep-answer"><b>면접 답변 핵심</b><p>“Web 제품 개발 경험은 없지만 C#/.NET 장비 SW에서 상태관리, 통신, DB, 권한과 오류 복구를 수행했습니다. Web 구조에서는 장비 통신 Worker와 업무 API를 분리하고, REST API로 조회·명령을 처리하며 실시간 상태는 SignalR로 전달하겠습니다. 인증·권한, 중복 요청 방지, 중앙 예외 처리, Swagger와 서버 로그를 기본으로 적용하겠습니다.”</p></div>
                 <div class="callout">작은 PoC 권장: 장비 Emulator → .NET Worker → DB → ASP.NET Core 상태 API</div>
               </div>
             </details>
@@ -700,6 +723,7 @@
                   <li><label><input type="checkbox"><span>Emulator와 실제 장비 시험의 한계 구분</span></label></li>
                   <li><label><input type="checkbox"><span>변경 영향분석과 회귀시험 선정</span></label></li>
                 </ul>
+                <div class="prep-answer"><b>면접 답변 핵심</b><p>“Verification은 요구사항과 설계대로 만들었는지 확인하는 활동이고, Validation은 실제 사용 목적과 사용자 요구에 맞는지 확인하는 활동입니다. SRS·설계·구현·위험통제·시험을 식별자로 연결하고 정상뿐 아니라 경계·오류·복구 조건을 시험합니다. Emulator는 프로토콜과 흐름의 1차 검증에 사용하고 물리 동작과 성능은 실제 장비에서 확인합니다. 변경 후에는 영향받는 인터페이스와 위험을 기준으로 회귀시험을 선정합니다.”</p></div>
               </div>
             </details>
 
@@ -712,6 +736,7 @@
                   <li><label><input type="checkbox"><span>오염방지와 검체·시약 lot 추적</span></label></li>
                   <li><label><input type="checkbox"><span>LIS/LIMS, audit trail, 결과 승인</span></label></li>
                 </ul>
+                <div class="prep-answer"><b>면접 답변 핵심</b><p>“PCR 검사는 검체 접수와 바코드 확인, 핵산 추출, 반응액 준비, thermal cycling, 형광 측정과 Ct 분석, 결과 판정 순서로 이해하고 있습니다. 양성·음성·내부 대조군으로 검사 유효성을 확인하고 전처리와 증폭 구역을 분리해 오염을 관리합니다. 검체·시약 lot·장비·사용자·결과 변경 이력을 추적하고 LIS/LIMS에는 승인된 결과만 전달해야 합니다.”</p></div>
               </div>
             </details>
 
@@ -724,6 +749,7 @@
                   <li><label><input type="checkbox"><span>침투시험 결과와 위험통제·검증 연결</span></label></li>
                   <li><label><input type="checkbox"><span>가용성·결과 무결성·환자 안전 관점 설명</span></label></li>
                 </ul>
+                <div class="prep-answer"><b>면접 답변 핵심</b><p>“인증과 RBAC로 허가된 사용자만 검사 조건을 변경하게 하고, 실행 파일과 설정 무결성으로 변조를 탐지합니다. 외부 통신에는 TLS와 인증서를 적용하고 보안 이벤트는 감사로그로 남깁니다. SBOM/VEX와 취약점 평가로 알려진 위험을 관리하며 STRIDE에서 찾은 위협을 위험통제와 검증시험으로 연결합니다. 목표는 보안 자체가 아니라 검사 가용성, 결과 무결성과 환자 안전을 지키는 것입니다.”</p></div>
               </div>
             </details>
           </div>
