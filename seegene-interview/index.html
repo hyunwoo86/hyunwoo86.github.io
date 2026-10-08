@@ -510,6 +510,91 @@
       font-size: 13px;
     }
 
+    .simple-flow {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      margin: 18px 0;
+    }
+
+    .simple-flow div {
+      position: relative;
+      padding: 14px 10px;
+      text-align: center;
+      color: var(--navy);
+      background: #f6f9fc;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .simple-flow div:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -10px;
+      z-index: 2;
+      color: var(--blue);
+    }
+
+    .term-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .term {
+      padding: 14px;
+      background: #fbfcfd;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-size: 13px;
+    }
+
+    .term b { display: block; margin-bottom: 4px; color: var(--navy); }
+
+    .question-group { margin-bottom: 12px; }
+
+    .question-group > summary {
+      background: #f6f9fc;
+      font-size: 16px;
+    }
+
+    .bank-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 11px;
+    }
+
+    .mini-qa {
+      padding: 15px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+    }
+
+    .mini-qa h4 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 15px;
+    }
+
+    .mini-qa p {
+      margin: 0;
+      color: #40566a;
+      font-size: 13px;
+    }
+
+    .confirm {
+      margin-top: 9px;
+      padding: 7px 9px;
+      color: var(--red);
+      background: var(--red-bg);
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
     .footer {
       padding: 20px 6px;
       color: var(--muted);
@@ -528,6 +613,8 @@
       .page { width: min(100% - 18px, 1180px); padding-top: 9px; }
       .hero, section { padding: 22px; border-radius: 16px; }
       .topic-grid, .stat-grid, .priority-grid, .flow, .week { grid-template-columns: 1fr; }
+      .simple-flow, .term-grid, .bank-grid { grid-template-columns: 1fr; }
+      .simple-flow div:not(:last-child)::after { content: "↓"; right: 50%; bottom: -17px; }
       .allocation-row { grid-template-columns: 1fr 44px; }
       .allocation-row .track { grid-column: 1 / -1; grid-row: 2; }
       .compare { display: block; overflow-x: auto; }
@@ -569,8 +656,10 @@
         <a href="#topics">기술 준비 8개 영역</a>
         <a href="#design">시스템 설계 문제</a>
         <a href="#web-answer">Web 경험 답변</a>
-        <a href="#pcr">PCR 도메인</a>
+        <a href="#pcr-basic">PCR 쉬운 설명</a>
+        <a href="#pcr">dRAST와 PCR 비교</a>
         <a href="#questions">예상 기술 질문</a>
+        <a href="#interviewer-bank">추가 면접관 질문</a>
         <a href="#schedule">7일 준비 일정</a>
         <a href="#boundary">사실관계 경계</a>
       </nav>
@@ -588,6 +677,10 @@
           <div class="callout">
             <strong>면접 메시지 순서</strong><br>
             자동화 장비 개발 → 장비 연동·장애 복구 → 시스템 검증 → Web 전환 가능성 → 사이버보안 차별화
+          </div>
+          <div class="callout" style="background:#fff0ee;border-left-color:#b42318">
+            <strong>간절함을 보여주는 가장 좋은 방법</strong><br>
+            “꼭 뽑아 달라”는 말보다 씨젠 업무를 이해하고, 본인 사례를 구체적으로 설명하며, 모르는 부분은 인정한 뒤 준비한 내용을 보여주는 것이 더 강합니다. 답변은 결론 → 직접 행동 → 확인된 결과 → 한계와 배운 점 순서로 말합니다.
           </div>
         </section>
 
@@ -776,6 +869,41 @@
           <div class="callout danger"><strong>금지 표현</strong>: “WPF를 했으니 Web도 같습니다”, “금방 다 할 수 있습니다”, 실제로 만들지 않은 Web 프로젝트를 경험처럼 말하기</div>
         </section>
 
+        <section id="pcr-basic">
+          <h2>PCR이란? 면접용으로 쉽게 이해하기</h2>
+          <div class="positioning">PCR은 검체 안에 아주 적게 들어 있는 특정 DNA 구간을 반복해서 복제해, 검출할 수 있을 만큼 늘리는 검사 방법입니다.</div>
+
+          <h3>쉽게 비유하면</h3>
+          <p>검체 속에서 찾으려는 병원체의 유전자 한 부분을 지정하고, 그 부분만 복사기로 여러 번 복제하는 것과 비슷합니다. 복제가 진행될 때 발생하는 형광 신호를 실시간으로 측정하면 목표 유전자가 있었는지 판단할 수 있습니다.</p>
+
+          <div class="simple-flow">
+            <div>검체 접수·바코드</div>
+            <div>핵산 추출</div>
+            <div>시약·검체 분주</div>
+            <div>온도 반복·증폭</div>
+            <div>형광·Ct 분석</div>
+            <div>결과 판정·보고</div>
+          </div>
+
+          <h3>핵심 용어 6개</h3>
+          <div class="term-grid">
+            <div class="term"><b>DNA / RNA</b>병원체의 유전정보. RNA 바이러스는 DNA로 바꾸는 역전사 과정이 필요할 수 있음</div>
+            <div class="term"><b>Primer</b>어느 유전자 구간을 증폭할지 지정하는 짧은 염기서열</div>
+            <div class="term"><b>Real-time PCR(qPCR)</b>증폭 과정에서 형광을 매 cycle 측정해 결과를 실시간 분석</div>
+            <div class="term"><b>Ct 값</b>형광이 기준선을 넘은 cycle. 일반적으로 낮을수록 초기 표적량이 많지만 검사 조건과 대조군을 함께 봐야 함</div>
+            <div class="term"><b>Multiplex PCR</b>한 반응에서 여러 병원체 또는 표적을 동시에 검사하는 방식</div>
+            <div class="term"><b>대조군</b>양성·음성·내부 대조군으로 시약, 오염, 추출·증폭 과정과 검사 유효성을 확인</div>
+          </div>
+
+          <div class="callout">
+            <strong>중요한 주의점</strong><br>
+            Ct 값만으로 환자의 질병 중증도나 전염력을 단정하면 안 됩니다. 검사법, 검체 품질, 채취 시점과 판정 기준을 함께 봐야 합니다.
+          </div>
+
+          <h3>면접에서 30초로 설명</h3>
+          <div class="answer">“PCR은 검체에서 추출한 특정 유전자 구간을 반복적으로 증폭해 병원체 존재 여부를 확인하는 검사입니다. Real-time PCR은 증폭 과정의 형광 신호를 매 cycle 측정하고 Ct 값을 이용해 결과를 판정합니다. 자동화 장비 SW 관점에서는 검체와 시약 식별, 분주, 온도 cycle, 대조군, 오염방지, 결과 추적성이 중요하다고 이해하고 있습니다.”</div>
+        </section>
+
         <section id="pcr">
           <h2>dRAST 경험을 PCR 자동화로 연결하는 방법</h2>
           <table class="compare">
@@ -791,7 +919,7 @@
         </section>
 
         <section id="questions">
-          <h2>예상 기술 질문 12개</h2>
+          <h2>핵심 기술 질문 12개</h2>
           <ol class="question-list">
             <li>
               <strong>dRAST에서 본인이 직접 설계·개발한 범위와 외주·AI팀의 범위를 구분해 주세요.</strong>
@@ -878,6 +1006,65 @@
               </div></details>
             </li>
           </ol>
+        </section>
+
+        <section id="interviewer-bank">
+          <h2>면접관 관점 추가 질문 24개</h2>
+          <p class="lead">핵심 질문 12개와 합쳐 총 36개입니다. 답변은 외우기보다 결론–근거 사례–배운 점 순서만 익히세요.</p>
+
+          <details class="question-group" open>
+            <summary>① 지원동기·이직·장기근속 — 6문항</summary>
+            <div class="detail-body bank-grid">
+              <article class="mini-qa"><h4>1. 왜 씨젠에 지원했습니까?</h4><p>“제가 가장 오래 수행한 일이 IVD 자동화 장비 SW입니다. 씨젠 공고의 요구사항 분석, 모듈 연동, 통합시험과 현장지원이 QDST·dRAST에서 수행한 업무와 직접 연결됩니다. 최근 쌓은 IEC 62304 V&amp;V와 사이버보안 경험까지 더해 의료 자동화 분야에서 장기적으로 기여하고 싶어 지원했습니다.”</p></article>
+              <article class="mini-qa"><h4>2. 현재 회사에서 왜 이직하려 합니까?</h4><p>“의료기기 SW 경험 중에서도 제가 가장 깊게 해 온 IVD 자동화에 다시 집중하려는 것이 첫 번째 이유입니다. 생활 기반과의 지속가능성도 함께 고려해, 다음 회사에서는 짧게 이동하기보다 한 분야에서 오래 책임지고 기여하려 합니다.”</p><div class="confirm">전 직장 불만·개인 재무 사정은 말하지 않고 직무 적합성과 장기근속으로 설명</div></article>
+              <article class="mini-qa"><h4>3. 제노레이는 왜 9개월 만에 나왔습니까?</h4><p>“FDA 사이버보안 대응과 SW 안정화 과제에 집중해 개발·문서·시험 대응 경험을 쌓았습니다. 이후 OCT/FFR 의료영상과 FDA V&amp;V를 더 깊게 수행할 기회가 있어 개발과 규제를 함께 보는 방향으로 이동했습니다.”</p></article>
+              <article class="mini-qa"><h4>4. 이번에는 오래 근무할 수 있습니까?</h4><p>“퀀타매트릭스에서 7년 반 동안 근무했기 때문에 한 제품을 오래 책임지는 방식이 제게 맞는다는 것을 알고 있습니다. 최근 이동을 통해 앞으로 집중할 분야가 IVD·의료 자동화라는 점도 더 명확해졌습니다. 씨젠에서는 제품과 검사 흐름을 깊게 이해하며 장기적으로 역할을 넓히고 싶습니다.”</p></article>
+              <article class="mini-qa"><h4>5. 다른 지원자보다 본인을 채용해야 하는 이유는?</h4><p>“자동화 장비 UI만 만든 것이 아니라 검사 흐름, 장비 연동, 상태복구, 통합시험, 배포와 현장지원까지 경험했습니다. 여기에 의료기기 요구사항 추적, V&amp;V와 사이버보안 검증 경험이 있어 기능 구현 단계부터 검증 증거와 운영 위험을 함께 볼 수 있습니다.”</p></article>
+              <article class="mini-qa"><h4>6. 본인의 가장 큰 약점은 무엇입니까?</h4><p>“경력이 Windows 의료기기 SW 중심이라 Web 제품 개발 경험은 부족합니다. 이를 숨기지 않고 ASP.NET Core Web API, 인증·권한, 실시간 상태 전달 구조를 학습하고 있습니다. 장비 상태관리·통신·DB·검증 경험을 기반으로 Web 실행환경의 차이를 빠르게 보완하겠습니다.”</p></article>
+            </div>
+          </details>
+
+          <details class="question-group">
+            <summary>② 책임 범위·리드·협업 — 5문항</summary>
+            <div class="detail-body bank-grid">
+              <article class="mini-qa"><h4>7. ‘제품화를 리드했다’는 정확히 무엇을 의미합니까?</h4><p>“순수 관리자가 아니라 직접 개발하는 테크리드에 가까웠습니다. Windows 앱의 설계·구현, 장비·분석 프로그램 연동, 통합검증, 배포와 유지보수를 담당하고 기능별 진행과 이슈를 조율했습니다. 회사 전체 일정이나 예산을 총괄한 PM 역할로 확대해서 말하지 않겠습니다.”</p></article>
+              <article class="mini-qa"><h4>8. 프로젝트 기간과 개발 인원은?</h4><p>Windows 앱, 외주 미들웨어, 분석팀처럼 역할을 나눠 설명하고 본인이 직접 담당한 범위를 먼저 답합니다. 정확한 시작·종료 연월과 인원은 확인된 숫자만 말해야 합니다.</p><div class="confirm">면접 전 직접 확인: dRAST 3.0 참여기간, 앱 개발 인원, 전체 협업 인원</div></article>
+              <article class="mini-qa"><h4>9. 요구사항이 모호하거나 서로 충돌하면 어떻게 합니까?</h4><p>“사용 시나리오와 실패 시 위험을 먼저 확인하고, 정상 흐름과 예외 흐름을 구분합니다. 연구원·HW·RA/QA와 용어와 완료 조건을 맞춘 뒤 요구사항과 인터페이스 문서에 반영합니다. 결정되지 않은 부분은 가정으로 구현하지 않고 이슈로 남겨 승인받습니다.”</p></article>
+              <article class="mini-qa"><h4>10. 외주 개발사의 일정이나 품질이 기대와 다르면?</h4><p>“감정적으로 압박하기보다 인터페이스 명세와 재현 조건, 기대 결과와 실제 결과를 기준으로 차이를 제시합니다. 전체 일정을 막는 항목과 후속 보완 가능한 항목을 나누고, 중간 산출물과 통합시험 시점을 짧게 설정해 뒤늦게 문제를 발견하지 않도록 하겠습니다.”</p></article>
+              <article class="mini-qa"><h4>11. HW팀 또는 다른 부서와 의견이 달랐던 사례는?</h4><p>“로그와 통신 기록, 실제 장비 상태를 같은 시간축으로 비교해 각 팀의 추측을 검증 가능한 항목으로 바꾸는 방식으로 조율했습니다. 누구의 잘못인지보다 다음 시험에서 무엇을 확인하면 원인을 좁힐 수 있는지 합의했습니다.”</p><div class="confirm">실제 사례 하나를 선택: 가열 sequence 차이, Focus mark 위치, 전원보드 통신 끊김</div></article>
+            </div>
+          </details>
+
+          <details class="question-group">
+            <summary>③ 시스템 아키텍처·운영·현장 대응 — 7문항</summary>
+            <div class="detail-body bank-grid">
+              <article class="mini-qa"><h4>12. 의료 자동화 시스템을 어떤 계층으로 나누겠습니까?</h4><p>“UI, 업무·검사 Orchestrator, 장비 Adapter, 데이터 저장소, 외부 시스템 연동으로 분리하겠습니다. UI가 장비를 직접 제어하지 않고 Orchestrator가 검사 상태와 자원을 관리하며, Adapter가 장비별 프로토콜 차이를 흡수하도록 하겠습니다.”</p></article>
+              <article class="mini-qa"><h4>13. 한 모듈이 끊겼을 때 전체 검사를 멈춰야 합니까?</h4><p>“해당 모듈이 안전이나 여러 검체에 공통 영향을 주면 전체를 안전 정지하고, 독립된 검체만 영향받는다면 해당 검사만 보류할 수 있습니다. 판단 기준은 자원 공유 범위, 장비 현재 상태, 결과 무결성과 복구 가능성입니다.”</p></article>
+              <article class="mini-qa"><h4>14. 바코드와 LIS 정보가 일치하지 않으면?</h4><p>“자동 보정하지 않고 검체를 보류 상태로 전환합니다. 어느 시스템의 값이 기준인지 운영 정책을 따르고, 사용자에게 차이를 명확히 보여 승인된 수정만 허용합니다. 원본 값, 수정자, 시각과 사유를 audit trail에 남깁니다.”</p></article>
+              <article class="mini-qa"><h4>15. 장비·프로토콜·시약 버전 호환은 어떻게 관리합니까?</h4><p>“장비 firmware, 통신 protocol, SW, 시약 lot와 assay 버전의 호환표를 관리하고 시작 시 조합을 확인합니다. 지원되지 않는 조합은 실행 전에 차단하고, 호환 범위를 변경할 때는 관련 요구사항과 통합시험을 함께 갱신합니다.”</p></article>
+              <article class="mini-qa"><h4>16. 업데이트 중 실패하면 어떻게 복구합니까?</h4><p>“설치 전 버전·DB schema·여유 공간과 무결성을 확인하고 기존 설정과 DB를 백업합니다. 애플리케이션과 DB migration의 성공을 각각 확인하며, 실패하면 호환 가능한 이전 버전으로 rollback합니다. 재시작 후 장비·DB 상태 확인까지 완료되어야 업데이트 성공으로 판단합니다.”</p></article>
+              <article class="mini-qa"><h4>17. 장애 분석을 위해 어떤 로그를 남깁니까?</h4><p>“검사 ID·검체 ID·장비·명령 ID를 연결하고 요청, ACK, 실제 완료, 상태 전환과 오류를 같은 시간 기준으로 기록합니다. 사용자 변경과 수동 복구는 audit log로 분리하고, 개인정보와 보안정보는 최소화하거나 보호합니다.”</p></article>
+              <article class="mini-qa"><h4>18. 현장 장애 연락을 받으면 무엇부터 합니까?</h4><p>“환자·검사 결과와 장비 안전 영향을 먼저 확인하고 추가 검사를 중단할지 판단합니다. 버전, 재현 순서, 로그와 장비 상태를 확보한 뒤 SW·통신·HW·운영 조건으로 가설을 나눕니다. 임시 조치와 근본 수정, 회귀시험과 배포 결과를 구분해 기록합니다.”</p></article>
+            </div>
+          </details>
+
+          <details class="question-group">
+            <summary>④ dRAST·카메라·자동초점 심층 — 4문항</summary>
+            <div class="detail-body bank-grid">
+              <article class="mini-qa"><h4>19. 2022년 화면과 2024년 구조 설명은 어떤 관계입니까?</h4><p>“화면 자료는 2022년 사용자 매뉴얼 시점이고, 구조 설명은 이후 리팩터링된 2024년 보관 소스를 기준으로 합니다. 제품 기능 설명과 내부 구조의 기준 시점이 다르므로 한 버전의 화면과 코드라고 섞어 말하지 않겠습니다.”</p></article>
+              <article class="mini-qa"><h4>20. 카메라를 1대에서 2대로 바꾼 이유와 효과는?</h4><p>“촬영 영역 두 곳을 한 카메라가 이동하며 처리하던 시간을 줄이기 위한 변경이었습니다. 카메라 ID와 Z축을 구분해 각각의 프레임을 처리했습니다. 정확한 시간 단축률을 측정한 기록은 없어서 ‘2배 빨라졌다’고 말하지 않겠습니다.”</p></article>
+              <article class="mini-qa"><h4>21. 최신 프레임만 남기는 DropOldest가 안전합니까?</h4><p>“실시간 초점·노출 계산에서 오래된 프레임이 쌓여 현재 위치와 어긋나는 것을 막기 위한 정책입니다. 다만 검사 결과로 저장할 영상은 촬영 명령, 카메라 ID와 완료 시점을 별도로 확인해야 합니다. 두 경로가 같은지 여부는 면접 전 실제 구현 범위를 다시 확인하겠습니다.”</p></article>
+              <article class="mini-qa"><h4>22. 왜 Canny 기반 선명도 값을 사용했습니까?</h4><p>“여러 선명도 지표를 비교 도구에서 관찰하고 해당 장비·패널 조건에서 초점 부근 변화를 판단하기 좋은 값으로 적용했습니다. Canny가 모든 환경에서 가장 정확하다는 뜻은 아닙니다. 정량 정확도 수치는 없으므로 기준 초점 대비 위치 오차와 반복 편차로 검증하겠다고 답하겠습니다.”</p></article>
+            </div>
+          </details>
+
+          <details class="question-group">
+            <summary>⑤ 검증·입사 후 계획·마지막 질문 — 2문항</summary>
+            <div class="detail-body bank-grid">
+              <article class="mini-qa"><h4>23. 입사 후 3개월 동안 무엇을 하겠습니까?</h4><p>“첫 달에는 검사 흐름, 모듈 경계, 인터페이스와 개발·검증 절차를 익히겠습니다. 두 번째 달에는 기존 결함이나 작은 연동 기능을 맡아 코드와 실장비 검증 흐름을 경험하겠습니다. 세 번째 달에는 담당 기능을 요구사항부터 통합시험까지 완결하고, 반복 장애나 검증 공백 한 가지를 개선하겠습니다.”</p></article>
+              <article class="mini-qa"><h4>24. 마지막으로 궁금한 점이 있습니까?</h4><p>“이 직무가 처음 맡게 될 자동화 시스템과 현재 가장 큰 기술적 과제는 무엇인가요?”, “Web과 Windows SW의 책임 경계는 어떻게 나뉘나요?”, “실장비 통합시험과 의료기기 산출물 검토는 어떤 방식으로 진행하나요?”, “입사 후 3개월 내 기대하는 결과는 무엇인가요?” 중 두 개를 선택합니다.</p></article>
+            </div>
+          </details>
         </section>
 
         <section id="schedule">
